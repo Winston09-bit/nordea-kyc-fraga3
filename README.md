@@ -19,3 +19,10 @@
 
 - **IN från LandveX AB:** +399 941,60 SEK (23 reimbursements)  
 - **UT bolagsutlägg:** -417 177,55 SEK (113 transaktioner, sep 2025–apr 2026)
+
+## Revisor
+
+**Andreas Vretblom**, Auktoriserad Revisor  
+**KPMG AB** (reg.nr 556043-4465)  
+Ansvarig revisor för LandveX AB:s revision.  
+Se bifogat `KPMG-Revisionsintyg-LandveX-2026.pdf`
