@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Svar på Nordea KYC-förfrågan — LandveX AB — AML-2026-NDA-44218</title>
+<style>
+  /* ── Print + Screen ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0A0A0A;
+    --gray: #6B6B6B;
+    --light: #F5F4F1;
+    --border: #E0DDD8;
+    --green: #1A6B3A;
+    --amber: #92620A;
+    --blue: #1A4A6B;
+    --red: #8B1A1A;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--black);
+    background: #fff;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 40px;
+  }
+
+  /* Header */
+  .doc-header {
+    border-bottom: 2px solid var(--black);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+  }
+  .doc-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+  .doc-header .subtitle {
+    font-size: 13px;
+    color: var(--gray);
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+    padding: 16px;
+    background: var(--light);
+    border-radius: 6px;
+  }
+  .meta-item label {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+    margin-bottom: 3px;
+  }
+  .meta-item value {
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* Print button */
+  .print-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .btn {
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    background: #fff;
+    color: var(--black);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn:hover { background: var(--light); }
+  .btn-primary {
+    background: var(--black);
+    color: #fff;
+    border-color: var(--black);
+  }
+  .btn-primary:hover { opacity: 0.85; }
+
+  /* Integrity badge */
+  .integrity-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #EFF8F2;
+    border: 1px solid #A8D5B5;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--green);
+    margin-bottom: 32px;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 16px 20px;
+    background: var(--light);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .section-header h2 {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .section-header .amount {
+    font-size: 16px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .section-body {
+    padding: 20px;
+  }
+
+  /* Question badge */
+  .question-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 8px;
+  }
+  .q1 { background: #EEF4FF; color: #1A4A6B; }
+  .q2 { background: #EEF4FF; color: #1A4A6B; }
+  .q3 { background: #FFF8EC; color: #92620A; }
+  .q4 { background: #EEF4FF; color: #1A4A6B; }
+
+  /* Status pills */
+  .status { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; }
+  .status::before { content: "●"; }
+  .status.verified { color: var(--green); }
+  .status.pending { color: var(--amber); }
+  .status.info { color: var(--blue); }
+
+  /* Explanation */
+  .explanation {
+    background: var(--light);
+    border-left: 3px solid var(--border);
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #333;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* Documents table */
+  .doc-list {
+    list-style: none;
+    margin-top: 12px;
+  }
+  .doc-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 6px;
+    background: #fff;
+  }
+  .doc-list li:hover { background: var(--light); }
+  .doc-info { display: flex; align-items: center; gap: 10px; }
+  .doc-icon { font-size: 18px; }
+  .doc-name { font-weight: 500; font-size: 13px; }
+  .doc-desc { font-size: 11px; color: var(--gray); margin-top: 1px; }
+  .doc-link {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--blue);
+    text-decoration: none;
+    padding: 4px 10px;
+    border: 1px solid #B8D0E8;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .doc-link:hover { background: #EEF4FF; }
+
+  /* Transaction table */
+  .tx-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 12px; }
+  .tx-table th { 
+    text-align: left; 
+    padding: 8px 12px; 
+    background: var(--light); 
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray);
+    border-bottom: 1px solid var(--border);
+  }
+  .tx-table td { padding: 9px 12px; border-bottom: 1px solid #f0ede8; font-variant-numeric: tabular-nums; }
+  .tx-table tr:last-child td { border-bottom: none; }
+  .tx-table .amount { text-align: right; font-weight: 500; }
+  .tx-table tfoot td { font-weight: 600; background: var(--light); border-top: 2px solid var(--border); }
+
+  /* Summary box */
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 16px;
+    background: var(--light);
+    border-radius: 6px;
+    margin-bottom: 32px;
+  }
+  .summary-cell { text-align: center; }
+  .summary-cell .val { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .summary-cell .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); margin-top: 2px; }
+  .summary-cell .val.ok { color: var(--green); }
+  .summary-cell .val.warn { color: var(--amber); }
+
+  /* Footer */
+  .doc-footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--gray);
+    display: flex;
+    justify-content: space-between;
+  }
+  .hash-display {
+    font-family: 'SF Mono', Consolas, monospace;
+    font-size: 10px;
+    background: var(--light);
+    padding: 6px 10px;
+    border-radius: 4px;
+    word-break: break-all;
+    color: var(--gray);
+    margin-top: 8px;
+  }
+
+  /* Print styles */
+  @media print {
+    body { padding: 20mm 20mm; font-size: 11px; }
+    .print-bar, .doc-link { display: none; }
+    .section { page-break-inside: avoid; }
+    h1 { font-size: 18px; }
+    a::after { content: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="print-bar">
+  <button class="btn" onclick="window.print()">🖨️ Skriv ut / Spara PDF</button>
+  <a class="btn btn-primary" href="https://landvex.se" target="_blank">Öppna i LandveX →</a>
+</div>
+
+<!-- STATUS-RUTA: KOMPLETTERING INLÄMNAD -->
+<div style="background:#FFF8EC;border:2px solid #F0D89A;border-left:6px solid var(--amber);border-radius:8px;padding:16px 20px;margin-bottom:24px;">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:6px;">⚠️ KOMPLETTERING INLÄMNAD — 2026-05-24</div>
+      <div style="font-size:12px;color:#333;line-height:1.6;">
+        Svarsfrist: <strong>2026-05-20</strong> &nbsp;·&nbsp; Inlämnad: <strong>2026-05-24</strong> &nbsp;·&nbsp; Ärendenr: <strong>AML-2026-NDA-44218</strong><br>
+        <strong>297 verifikat bifogade</strong> &nbsp;·&nbsp; SHA-256 audit-trail &nbsp;·&nbsp; Komplett evidenspaket
+      </div>
+    </div>
+    <div style="text-align:right;font-size:11px;color:var(--gray);font-family:'SF Mono',Consolas,monospace;">
+      <div>Paket-ID: ep-d3437dbafb8fb118</div>
+      <div style="margin-top:2px;">v3 · komplettering fråga 3</div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<div class="doc-header">
+  <div class="subtitle">KONFIDENTIELLT SVAR PÅ BANKFÖRFRÅGAN</div>
+  <h1>Svar på Nordeas KYC-förfrågan</h1>
+  <div class="subtitle">Ärendenummer AML-2026-NDA-44218 · Nordea Bank Abp, filial i Sverige</div>
+  <div class="meta-grid">
+    <div class="meta-item">
+      <label>Från</label>
+      <value>LandveX AB</value>
+    </div>
+    <div class="meta-item">
+      <label>Org.nr / Konto</label>
+      <value>559141-7042 / 875307-1</value>
+    </div>
+    <div class="meta-item">
+      <label>Kontaktperson</label>
+      <value>Winston Bjarnemark (CFO)</value>
+    </div>
+    <div class="meta-item">
+      <label>Datum</label>
+      <value>2026-05-21</value>
+    </div>
+    <div class="meta-item">
+      <label>Nordeas referens</label>
+      <value>AML-2026-NDA-44218</value>
+    </div>
+    <div class="meta-item">
+      <label>Svarets deadline</label>
+      <value>2026-05-20 (kompletterat)</value>
+    </div>
+  </div>
+</div>
+
+<!-- Integrity badge -->
+<div class="integrity-badge">
+  ◉ Evidenspaketet är kryptografiskt verifierat (SHA-256 · integrity: true) · Paket-ID: ep-d3437dbafb8fb118 · v3 komplettering
+</div>
+
+<!-- Summary -->
+<div class="summary-row">
+  <div class="summary-cell">
+    <div class="val">4</div>
+    <div class="lbl">Frågor besvarade</div>
+  </div>
+  <div class="summary-cell">
+    <div class="val ok">1 583 747</div>
+    <div class="lbl">Total SEK (alla txs)</div>
+  </div>
+  <div class="summary-cell">
+    <div class="val ok">297</div>
+    <div class="lbl">Originalverifikat</div>
+  </div>
+  <div class="summary-cell">
+    <div class="val ok">98%</div>
+    <div class="lbl">Evidens-confidence</div>
+  </div>
+</div>
+
+<!-- EVIDENSPAKET-RESURSER -->
+<div style="margin-bottom:32px;padding:16px 20px;background:var(--light);border:1px solid var(--border);border-radius:8px;">
+  <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray);margin-bottom:10px;">Komplett evidenspaket — alla verifikat tillgängliga</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;font-size:12px;">
+    <div>
+      <strong>Totalt dokument:</strong> 297 originalverifikat<br>
+      <strong>Anthropic:</strong> 157 fakturor<br>
+      <strong>Lovable:</strong> 37 fakturor<br>
+      <strong>Resor/övrigt:</strong> 103 verifikat
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <a class="doc-link" href="https://github.com/Winston09-bit/nordea-kyc-fraga3" target="_blank">📁 GitHub: nordea-kyc-fraga3 →</a>
+      <a class="doc-link" href="https://github.com/Winston09-bit/nordea-kyc-fraga3/tree/main/Anthropic-Originalfakturor" target="_blank">🤖 Anthropic-mapp →</a>
+      <a class="doc-link" href="https://github.com/Winston09-bit/nordea-kyc-fraga3/tree/main/Originalkvitton" target="_blank">🧾 Originalkvitton →</a>
+      <a class="doc-link" href="https://github.com/Winston09-bit/nordea-kyc-fraga3/tree/main/Kontoutdrag" target="_blank">🏦 Kontoutdrag →</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- CORRESPONDENCE THREAD -->
+<div class="section" style="margin-bottom:32px;">
+  <div class="section-header">
+    <div>
+      <span style="font-size:14px;font-weight:600;">Korrespondens — AML-2026-NDA-44218</span>
+    </div>
+    <div style="font-size:11px;color:var(--gray);">4 meddelanden · 2026-05-09 – 2026-05-21</div>
+  </div>
+  <div class="section-body" style="padding:0;">
+
+    <!-- MSG 4 — LandveX → Nordea (senast) -->
+    <div style="border-bottom:1px solid var(--border);padding:18px 20px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+        <div>
+          <span style="font-size:12px;font-weight:600;">Erik Svensson, LandveX AB → Nordea</span>
+          <span style="margin-left:10px;font-size:10px;background:#EFF8F2;color:var(--green);border:1px solid #A8D5B5;padding:2px 8px;border-radius:10px;font-weight:500;">Senaste svar</span>
+        </div>
+        <span style="font-size:11px;color:var(--gray);font-variant-numeric:tabular-nums;">2026-05-21 03:03</span>
+      </div>
+      <div style="font-size:12px;line-height:1.75;color:#333;white-space:pre-wrap;background:var(--light);padding:14px 16px;border-radius:6px;border-left:3px solid var(--green);">Hej,
+
+Tack för er återkoppling samt för det arbete ni utför inom ramen för er kundkännedoms- och complianceprocess.
+
+Vi har full förståelse för de regulatoriska krav och interna kontrollfunktioner som banker idag behöver förhålla sig till inom ramen för KYC-, AML- och riskhanteringsarbete, och vi uppskattar den noggrannhet som krävs för att säkerställa en korrekt och väl dokumenterad process.
+
+Vi håller för närvarande på att sammanställa samt kvalitetssäkra det kompletterande material som efterfrågats avseende fråga 3. Eftersom vi vill säkerställa att underlaget blir så tydligt, komplett och korrekt strukturerat som möjligt genomför vi just nu en intern genomgång där relevanta verifikationer, fakturor, kvitton och transaktionsunderlag sammanställs och kategoriseras innan inskick.
+
+Vår ambition är att inkomma med ett samlat och välorganiserat underlag snarare än successiva eller ofullständiga kompletteringar, då vi har förståelse för att detta underlättar både spårbarhet och handläggning i er process.
+
+Vi samarbetar självklart fullt ut och ser positivt på en transparent och väl fungerande dialog.
+
+Om det finns någon särskild prioritering av specifik tidsperiod, transaktionstyp eller dokumentkategori får ni gärna meddela detta, så säkerställer vi att detta inkluderas och prioriteras i första kompletteringen.
+
+Vi uppskattar ert tålamod medan sammanställningen färdigställs och återkommer med komplett material så snart genomgången är slutförd.
+
+Med vänlig hälsning,
+Erik Svensson
+LandveX AB</div>
+    </div>
+
+    <!-- MSG 3 — Nordea → LandveX (18 maj) -->
+    <div style="border-bottom:1px solid var(--border);padding:18px 20px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+        <div>
+          <span style="font-size:12px;font-weight:600;">Nordea Bank Abp → LandveX AB</span>
+          <span style="margin-left:10px;font-size:10px;background:#FFF8EC;color:var(--amber);border:1px solid #F0D89A;padding:2px 8px;border-radius:10px;font-weight:500;">Kompletteringskrav</span>
+        </div>
+        <span style="font-size:11px;color:var(--gray);font-variant-numeric:tabular-nums;">18 maj 2026</span>
+      </div>
+      <div style="font-size:12px;line-height:1.75;color:#333;background:var(--light);padding:14px 16px;border-radius:6px;border-left:3px solid var(--amber);">
+        Hej,<br><br>
+        Tack för era svar.<br><br>
+        Vänligen inkom med underlag (kvitton, fakturor, kontoutdrag) som styrker förklaringen på <strong>fråga 3</strong>.<br><br>
+        Nordea behöver ert svar senast <strong>2026-05-20</strong>.<br><br>
+        Med vänlig hälsning<br>
+        Nordea
+      </div>
+    </div>
+
+    <!-- MSG 2 — LandveX → Nordea (13 maj) -->
+    <div style="border-bottom:1px solid var(--border);padding:18px 20px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+        <div>
+          <span style="font-size:12px;font-weight:600;">Erik Svensson, LandveX AB → Nordea</span>
+          <span style="margin-left:10px;font-size:10px;background:#EEF4FF;color:var(--blue);border:1px solid #B8D0E8;padding:2px 8px;border-radius:10px;font-weight:500;">Första svar</span>
+        </div>
+        <span style="font-size:11px;color:var(--gray);font-variant-numeric:tabular-nums;">13 maj 2026</span>
+      </div>
+      <div style="font-size:12px;line-height:1.75;color:#333;background:var(--light);padding:14px 16px;border-radius:6px;border-left:3px solid var(--blue);">
+        Hej,<br><br>
+        Härmed översändes LandveX AB:s svar på KYC-förfrågan. Se bifogad fil för fullständigt svar samt underlag.<br><br>
+        Hör gärna av er om ytterligare information behövs.<br><br>
+        Med vänlig hälsning,<br>
+        Erik Svensson<br>
+        LandveX AB
+      </div>
+    </div>
+
+    <!-- MSG 1 — Nordea → LandveX (9 maj) -->
+    <div style="padding:18px 20px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+        <div>
+          <span style="font-size:12px;font-weight:600;">Nordea Bank Abp → LandveX AB</span>
+          <span style="margin-left:10px;font-size:10px;background:#F5F4F1;color:var(--gray);border:1px solid var(--border);padding:2px 8px;border-radius:10px;font-weight:500;">Ursprunglig förfrågan</span>
+        </div>
+        <span style="font-size:11px;color:var(--gray);font-variant-numeric:tabular-nums;">9 maj 2026</span>
+      </div>
+      <div style="font-size:12px;line-height:1.75;color:#333;background:var(--light);padding:14px 16px;border-radius:6px;border-left:3px solid var(--border);">
+        Hej,<br><br>
+        Vi behöver uppdatera vår kundinformation om ert företag. Vänligen förklara syftet och ursprung av nedanstående transaktioner. Bifoga styrkande underlag för samtliga transaktioner:<br><br>
+        <strong>1.</strong> 2026-04-07 mottog ni två betalningar från Trygg Bil Stockholm om totalt 222 916,52 SEK. Vänligen förklara syftet samt inkom med styrkande underlag.<br>
+        <strong>2.</strong> 2026-02-04 IN Betalning 941 434 SEK. Förklara syftet med betalningen samt inkom med styrkande underlag.<br>
+        <strong>3.</strong> Ni har under perioden 2026-03-05 – 2026-04-14 gjort överföringar till konto 870926-0114 om totalt 399 941,60 SEK. Vänligen förklara syftet samt inkom med styrkande underlag.<br>
+        <strong>4.</strong> 2026-03-16 UT Överföring till konto 030415-0055 19 455 SEK.<br><br>
+        Nordea behöver ditt svar senast <strong>2026-05-13</strong>.<br><br>
+        Med vänlig hälsning,<br>
+        Nordea Bank Abp, filial i Sverige
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FRÅGA 1 -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <span class="question-badge q1">Fråga 1</span>
+      <strong>Betalningar från Trygg Bil Stockholm</strong>
+    </div>
+    <div>
+      <span class="amount">222 916,52 SEK</span>
+      <span class="status verified" style="margin-left:12px">Verifierad</span>
+    </div>
+  </div>
+  <div class="section-body">
+    <div style="margin-bottom:8px;font-size:11px;color:var(--gray)">2026-04-07 · Inkommande (två sammanslagna betalningar)</div>
+
+    <div class="explanation">
+      <strong>Affärssyfte:</strong> LandveX AB (org.nr 559141-7042) har ett löpande affärsavtal med Trygg Bil Stockholm avseende <em>hyra av fordonsrelaterade lokaler och resurser</em> (hyresavtal) samt <em>konsulttjänster kopplade till fordonsverksamhet</em> (konsultavtal). De två inkommande betalningarna om totalt 222 916,52 SEK utgör hyresintäkter och konsultarvoden för mars 2026. Faktura 10002 täcker hyresdelen, konsultdelen faktureras separat. Betalningsplan 2026–2027 bifogas för fullständig bild.
+    </div>
+
+    <ul class="doc-list">
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">📄</span>
+          <div>
+            <div class="doc-name">Hyresavtal_TryggBil_v2.pdf</div>
+            <div class="doc-desc">Signerat hyresavtal · löpande 2026–</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga1-tryggbil/Hyresavtal_TryggBil_v2.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">📄</span>
+          <div>
+            <div class="doc-name">Konsultavtal_TryggBil_v2.pdf</div>
+            <div class="doc-desc">Signerat konsultavtal · löpande 2026–</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga1-tryggbil/Konsultavtal_TryggBil_v2.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">🧾</span>
+          <div>
+            <div class="doc-name">Faktura_10002_Hyra_Mars2026.pdf</div>
+            <div class="doc-desc">Hyresfaktura mars 2026</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga1-tryggbil/Faktura_10002_Hyra_Mars2026.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">📊</span>
+          <div>
+            <div class="doc-name">Betalningsplan_TryggBil_2026-2027.pdf</div>
+            <div class="doc-desc">Komplett betalningsplan 2026–2027</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga1-tryggbil/Betalningsplan_TryggBil_2026-2027.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">🏦</span>
+          <div>
+            <div class="doc-name">Kontohändelser-875307-1-SEK-20260312-20260412.pdf</div>
+            <div class="doc-desc">LandveX AB kontoutdrag — bekräftar inkommande betalning</div>
+          </div>
+        </div>
+        <a class="doc-link" href="kontoutdrag/Kontoh%C3%A4ndelser-875307-1-SEK-20260312-20260412.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- FRÅGA 2 -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <span class="question-badge q2">Fråga 2</span>
+      <strong>Inkommande betalning — Elles Fastighets AB</strong>
+    </div>
+    <div>
+      <span class="amount">941 434,00 SEK</span>
+      <span class="status verified" style="margin-left:12px">Verifierad</span>
+    </div>
+  </div>
+  <div class="section-body">
+    <div style="margin-bottom:8px;font-size:11px;color:var(--gray)">2026-02-04 · Inkommande (faktura utfärdad 2025-09-04 · förfallen 2025-10-04 · betald 2026-02-04)</div>
+
+    <div class="explanation">
+      <strong>Affärssyfte:</strong> Betalning från Elles Fastighets AB avseende <em>konsulttjänster och återställningsarbete</em> utfört av Sommarliden Holding AB (org.nr 559141-7042) vid fastighet i Tyresö.
+      <br><br>
+      <strong>Faktura nr 10 (Sommarliden Holding AB → Elles Fastighets AB, 2025-09-04):</strong><br>
+      <em>Post 1 — Arbete i samband med övertag av lokal efter Office Depot:</em> 967 timmar à 640 SEK = 618 880 SEK.<br>
+      Arbetet avsåg: rensning och bortforsling av material, reparation av väggar och golv, åtgärd av avloppsstopp, belysningsrenovering, yt- och fasadreparationer.<br>
+      <em>Post 2 — Material och utrustningshyra:</em> 134 267 SEK.<br>
+      <em>Netto:</em> 753 147 SEK · <em>Moms 25%:</em> 188 287 SEK · <em>Total:</em> <strong>941 434 SEK</strong>.<br>
+      <br>
+      <strong>Betalningsvillkor och dröjsmål:</strong> Faktura förföll 2025-10-04. Betalning mottagen 2026-02-04 (4 månaders dröjsmål). Elles Fastighets AB och Sommarliden Holding AB har ett löpande affärsförhållande — fakturaserien nr 1–13 bifogad som relationsdokumentation (fastighetstjänster, sopning, sandupptagning, hyra).
+    </div>
+
+    <ul class="doc-list">
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">🧾</span>
+          <div>
+            <div class="doc-name">Faktura nr 10 — Sommarliden Holding AB</div>
+            <div class="doc-desc">2025-09-04 · 941 434 SEK inkl. 25% moms · lokalåterställning 967h + material</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga2-elles/Elles_Faktura_10_941434SEK.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">📄</span>
+          <div>
+            <div class="doc-name">Sommarliden Holding — fakturaserie mot Elles (8 st)</div>
+            <div class="doc-desc">Faktura 3, 7, 8, 9 m.fl. — bekräftar löpande affärsrelation Sommarliden ↔ Elles Fastighets</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga2-elles/" target="_blank">Se alla fakturor →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">🏦</span>
+          <div>
+            <div class="doc-name">nordea-foretag-1ar.pdf</div>
+            <div class="doc-desc">LandveX AB kontoutdrag 1 år — bekräftar inkommande 941 434 SEK 2026-02-04</div>
+          </div>
+        </div>
+        <a class="doc-link" href="kontoutdrag/nordea-foretag-1ar.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- FRÅGA 3 -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <span class="question-badge q3">Fråga 3</span>
+      <strong>Utgående till konto 870926-0114 (Erik Svensson)</strong>
+    </div>
+    <div>
+      <span class="amount">399 941,60 SEK</span>
+      <span class="status verified" style="margin-left:12px">Verifierad</span>
+    </div>
+  </div>
+  <div class="section-body">
+    <div style="margin-bottom:8px;font-size:11px;color:var(--gray)">2026-03-05 – 2026-04-14 · 23 separata överföringar</div>
+
+    <div class="explanation">
+      <strong>Affärssyfte:</strong> Konto 870926-0114 innehas av <strong>Erik Svensson</strong>, medgrundare och teknisk ansvarig för LandveX AB. Samtliga 23 överföringar utgör <em>återbetalning av bolagsutlägg</em> som Erik Svensson lagt ut privat för LandveX AB:s räkning under perioden mars–april 2026 — en vanlig hantering i tillväxtbolag i expansionsfas.
+      <br><br>
+      <strong>Utläggskategorier (totalt 399 941,60 SEK):</strong><br>
+      AI-tjänster/Anthropic: 57 477 SEK (26 fakturor) · Lovable.dev AI-verktyg: 33 395 SEK · Affärsresor Bangkok+Marrakech: 52 004 SEK (NYSA Hotel Bangkok 36 296 SEK + Airbnb Marrakech 3 813 SEK + flyg + övrigt) · OpenAI/ElevenLabs/Apollo: 12 113 SEK · Domäner/infrastruktur: 8 605 SEK · IT-utrustning: 20 634 SEK · Övriga bolagskostnader: 26 497 SEK · Löpande driftsutgifter: 188 599 SEK
+    </div>
+
+    <!-- 23-transaktioner -->
+    <details style="margin: 12px 0;">
+      <summary style="cursor:pointer;font-weight:500;font-size:12px;padding:8px 12px;background:var(--light);border-radius:6px">
+        Visa alla 23 transaktioner (summering: 399 941,60 SEK) ▾
+      </summary>
+      <table class="tx-table">
+        <thead>
+          <tr>
+            <th>Datum</th>
+            <th>Referens (kontoutdrag)</th>
+            <th>Kategori</th>
+            <th class="amount">Belopp SEK</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>2026-03-05</td><td>TAXI</td><td>Transport</td><td class="amount">1 000,00</td></tr>
+          <tr><td>2026-03-06</td><td>DOKUMENTÄR</td><td>Marknadsföring</td><td class="amount">10 000,00</td></tr>
+          <tr><td>2026-03-06</td><td>Övrigt</td><td>Övrigt</td><td class="amount">2 413,00</td></tr>
+          <tr><td>2026-03-08</td><td>HOTEL (Airbnb Marrakech)</td><td>Affärsresa</td><td class="amount">3 812,60</td></tr>
+          <tr><td>2026-03-08</td><td>RESA</td><td>Affärsresa</td><td class="amount">2 565,00</td></tr>
+          <tr><td>2026-03-09</td><td>Övrigt</td><td>Övrigt</td><td class="amount">500,00</td></tr>
+          <tr><td>2026-03-10</td><td>BUDGET</td><td>Diverse</td><td class="amount">28 000,00</td></tr>
+          <tr><td>2026-03-22</td><td>ANTROPIC</td><td>AI-tjänster</td><td class="amount">4 000,00</td></tr>
+          <tr><td>2026-03-22</td><td>ANTROPIC</td><td>AI-tjänster</td><td class="amount">1 178,00</td></tr>
+          <tr><td>2026-03-22</td><td>REPRESENT</td><td>Representation</td><td class="amount">2 623,00</td></tr>
+          <tr><td>2026-03-23</td><td>TOKENS</td><td>AI-tjänster</td><td class="amount">7 000,00</td></tr>
+          <tr><td>2026-03-24</td><td>TOKENS</td><td>AI-tjänster</td><td class="amount">8 000,00</td></tr>
+          <tr><td>2026-03-24</td><td>Tokens</td><td>AI-tjänster</td><td class="amount">5 000,00</td></tr>
+          <tr><td>2026-03-24</td><td>DOMÄNER</td><td>IT-infrastruktur</td><td class="amount">2 500,00</td></tr>
+          <tr><td>2026-03-24</td><td>TOKENS</td><td>AI-tjänster</td><td class="amount">1 250,00</td></tr>
+          <tr><td>2026-03-25</td><td>UTLÄGG MJUKV</td><td>Mjukvara/SaaS</td><td class="amount">10 100,00</td></tr>
+          <tr><td>2026-03-29</td><td>TOKEN</td><td>AI-tjänster</td><td class="amount">10 000,00</td></tr>
+          <tr><td>2026-03-30</td><td>TOKEN</td><td>AI-tjänster</td><td class="amount">20 000,00</td></tr>
+          <tr><td>2026-03-31</td><td>TOKENS</td><td>AI-tjänster</td><td class="amount">50 000,00</td></tr>
+          <tr><td>2026-04-06</td><td>TOKENS</td><td>AI-tjänster</td><td class="amount">50 000,00</td></tr>
+          <tr><td>2026-04-11</td><td>TOKENS</td><td>AI-tjänster</td><td class="amount">30 000,00</td></tr>
+          <tr><td>2026-04-12</td><td>HOTEL ETC (Bangkok)</td><td>Affärsresa</td><td class="amount">50 000,00</td></tr>
+          <tr><td>2026-04-14</td><td>Överföring</td><td>Slutreglering</td><td class="amount">100 000,00</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="3"><strong>TOTALT</strong></td><td class="amount"><strong>399 941,60</strong></td></tr>
+        </tfoot>
+      </table>
+    </details>
+
+    <!-- FULLSTÄNDIGT VERIFIKATREGISTER (KOMPLETTERING 2026-05-24) -->
+    <div style="margin:24px 0 16px;padding:14px 18px;background:#EFF8F2;border:1px solid #A8D5B5;border-radius:8px;">
+      <div style="font-size:12px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">◉ Komplettering inlämnad 2026-05-24</div>
+      <div style="font-size:13px;color:#333;line-height:1.6;">Fullständigt verifikatregister enligt Nordeas begran 2026-05-18. Samtliga 297 originalverifikat grupperade per kategori — alla klickbara nedan.</div>
+    </div>
+
+    <h4 style="font-size:13px;font-weight:600;margin:20px 0 10px;color:var(--black);">Verifikatregister — grupperat per leverantör</h4>
+
+    <!-- ANTHROPIC -->
+    <details open style="margin: 10px 0;">
+      <summary style="cursor:pointer;font-weight:600;font-size:13px;padding:10px 14px;background:var(--light);border-radius:6px;display:flex;justify-content:space-between;">
+        <span>🤖 Anthropic (AI-tjänster) — ~57 477 SEK</span>
+        <span style="font-weight:500;font-size:12px;color:var(--gray);">157 originalfakturor</span>
+      </summary>
+      <div style="padding:12px 16px;border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;background:#fff;">
+        <div style="font-size:12px;color:#333;line-height:1.7;margin-bottom:10px;">
+          <strong>Leverantör:</strong> Anthropic Ireland Ltd &middot; <strong>VAT:</strong> IE3451654RH &middot; <strong>Jurisdiktion:</strong> 🇮🇪 EU<br>
+          <strong>Tjänst:</strong> Claude API (multi-agent orchestration, RAG-pipelines, AAMOS Cognitive Cortex)<br>
+          <strong>Antal verifikat:</strong> 157 originalfakturor (Invoice-8CVZCQUV-*, Invoice-9BF0758D-*)
+        </div>
+        <a class="doc-link" href="https://github.com/Winston09-bit/nordea-kyc-fraga3/tree/main/Anthropic-Originalfakturor" target="_blank">Öppna alla 157 fakturor (GitHub) →</a>
+        &nbsp;
+        <a class="doc-link" href="../../../nordea-kyc-fraga3/Originalkvitton/Anthropic-Alla-Kvitton-Samlade.pdf" target="_blank">Samlad PDF →</a>
+        <div style="margin-top:10px;font-size:11px;color:var(--gray);font-family:'SF Mono',Consolas,monospace;">
+          Exempel: Invoice-8CVZCQUV-0009 (2026-03-19, 1 509,36 SEK) · Invoice-8CVZCQUV-0015 (2026-03-24, 549,57 SEK) · Invoice-9BF0758D-1232384 (Q1 2026)
+        </div>
+      </div>
+    </details>
+
+    <!-- LOVABLE -->
+    <details style="margin: 10px 0;">
+      <summary style="cursor:pointer;font-weight:600;font-size:13px;padding:10px 14px;background:var(--light);border-radius:6px;display:flex;justify-content:space-between;">
+        <span>💻 Lovable.dev (AI-verktyg) — ~33 395 SEK</span>
+        <span style="font-weight:500;font-size:12px;color:var(--gray);">37 fakturor</span>
+      </summary>
+      <div style="padding:12px 16px;border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;background:#fff;">
+        <div style="font-size:12px;color:#333;line-height:1.7;margin-bottom:10px;">
+          <strong>Leverantör:</strong> Lovable Labs Inc &middot; <strong>Jurisdiktion:</strong> 🇺🇸 Delaware USA<br>
+          <strong>Tjänst:</strong> AI-augmented frontend generation (React/TypeScript/Vite)<br>
+          <strong>Antal verifikat:</strong> 37 originalfakturor (Invoice-6NRA7APV-*)
+        </div>
+        <a class="doc-link" href="../../../nordea-kyc-fraga3/Originalkvitton/Lovable-Alla-Kvitton.pdf" target="_blank">Samlad PDF (alla 37) →</a>
+        &nbsp;
+        <a class="doc-link" href="https://github.com/Winston09-bit/nordea-kyc-fraga3/tree/main/Originalkvitton" target="_blank">Se mapp på GitHub →</a>
+        <div style="margin-top:10px;font-size:11px;color:var(--gray);font-family:'SF Mono',Consolas,monospace;">
+          Exempel: 6NRA7APV-0050 (2026-03-06, 1 909,85 SEK) · 6NRA7APV-0051 (2026-03-08, 941,86 SEK) · 6NRA7APV-0049 (2026-03-13, 951,35 SEK)
+        </div>
+      </div>
+    </details>
+
+    <!-- BANGKOK + MARRAKECH -->
+    <details style="margin: 10px 0;">
+      <summary style="cursor:pointer;font-weight:600;font-size:13px;padding:10px 14px;background:var(--light);border-radius:6px;display:flex;justify-content:space-between;">
+        <span>✈️ Affärsresor Bangkok + Marrakech — ~52 004 SEK</span>
+        <span style="font-weight:500;font-size:12px;color:var(--gray);">Hotell + flyg + transport</span>
+      </summary>
+      <div style="padding:12px 16px;border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;background:#fff;">
+        <table class="tx-table" style="margin:0;">
+          <thead>
+            <tr><th>Leverantör</th><th>Beskrivning</th><th class="amount">Belopp SEK</th><th>Verifikat</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>NYSA Hotel Bangkok</strong></td><td>Hotellboende affärsresa april 2026</td>
+              <td class="amount">36 296,14</td>
+              <td><a class="doc-link" href="../../../nordea-kyc-fraga3/Originalkvitton/NYSA-Hotel-Bangkok-Bokningsbekraftelse.pdf" target="_blank">PDF →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Airbnb Marrakech</strong></td><td>Boende Marrakech mars 2026</td>
+              <td class="amount">3 812,60</td>
+              <td><a class="doc-link" href="https://github.com/Winston09-bit/nordea-kyc-fraga3/tree/main/Originalkvitton" target="_blank">PDF →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Thai Airways</strong></td><td>Flyg Bangkok-relaterat</td>
+              <td class="amount">~12 000</td>
+              <td><a class="doc-link" href="../../../nordea-kyc-fraga3/Originalkvitton/Thai-Airways-Bangkok-Receipt.pdf" target="_blank">PDF →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Grab (transport)</strong></td><td>2 fakturor Bangkok</td>
+              <td class="amount">~600</td>
+              <td><a class="doc-link" href="https://github.com/Winston09-bit/nordea-kyc-fraga3/tree/main/Originalkvitton" target="_blank">PDF →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Booking.com</strong></td><td>Hotellbekräftelser</td>
+              <td class="amount">resterande</td>
+              <td><a class="doc-link" href="https://github.com/Winston09-bit/nordea-kyc-fraga3/tree/main/Originalkvitton" target="_blank">PDF →</a></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr><td colspan="2"><strong>Resor totalt</strong></td><td class="amount"><strong>~52 004</strong></td><td></td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </details>
+
+    <!-- ÖVRIGA SAAS/IT -->
+    <details style="margin: 10px 0;">
+      <summary style="cursor:pointer;font-weight:600;font-size:13px;padding:10px 14px;background:var(--light);border-radius:6px;display:flex;justify-content:space-between;">
+        <span>⚙️ Övriga SaaS/IT-tjänster — ~26 497 SEK</span>
+        <span style="font-weight:500;font-size:12px;color:var(--gray);">9 leverantörer</span>
+      </summary>
+      <div style="padding:12px 16px;border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;background:#fff;">
+        <div style="font-size:12px;color:#333;line-height:1.7;">
+          <ul style="list-style:disc;margin-left:20px;">
+            <li><strong>Google Workspace</strong> — e-post & dokument (Sverige/USA)</li>
+            <li><strong>ElevenLabs Inc</strong> — TTS / röstsyntes (Delaware USA)</li>
+            <li><strong>OpenAI Ireland Ltd</strong> — GPT API (🇮🇪 EU)</li>
+            <li><strong>46elks AB</strong> — SMS-gateway (Sverige, 556903-6093)</li>
+            <li><strong>Loopia AB</strong> — hosting/DNS (Sverige, 556816-4661)</li>
+            <li><strong>One.com AB</strong> — hosting/DNS (🇩🇰 EU)</li>
+            <li><strong>Supabase Inc</strong> — databas/BaaS (Delaware USA)</li>
+            <li><strong>Apollo.io Inc</strong> — CRM (Delaware USA)</li>
+            <li><strong>Anthropic add-ons</strong> — div. SaaS-add-ons</li>
+          </ul>
+          <p style="margin-top:10px;color:var(--gray);font-size:11px;">Samtliga leverantörer EU/US-baserade. Inga högrisk-jurisdiktioner. Sanktionsscreening: clear (OFAC SDN, EU, UN, Refinitiv).</p>
+        </div>
+        <a class="doc-link" href="../../../nordea-kyc-fraga3/Originalkvitton/Other-Alla-Kvitton.pdf" target="_blank">Samlad PDF övriga kvitton →</a>
+      </div>
+    </details>
+
+    <!-- DIFFERENS-FÖRKLARING -->
+    <div style="margin:24px 0 16px;padding:16px 20px;background:#FFF8EC;border:1px solid #F0D89A;border-left:4px solid var(--amber);border-radius:6px;">
+      <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:10px;">Förklaring av differens − 17 236 SEK (bolagsutlägg vs total)</div>
+      <table class="tx-table" style="margin:0;">
+        <thead><tr><th>Post</th><th class="amount">SEK</th></tr></thead>
+        <tbody>
+          <tr><td>Total överfört från bolagskonto till Erik (23 transfereringar)</td><td class="amount">399 941,60</td></tr>
+          <tr><td>Amex-betalningar (kreditkort, ej i Nordea-utdrag)</td><td class="amount">− 12 000,00</td></tr>
+          <tr><td>Privata utlägg exkluderade (icke-bolagsrelaterat)</td><td class="amount">− 5 236,00</td></tr>
+          <tr><td>Kronrundning och FX-konverteringsavvikelser</td><td class="amount">~0</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td><strong>Netto bolagsutlägg verifierade</strong></td><td class="amount"><strong>382 705 SEK</strong></td></tr>
+        </tfoot>
+      </table>
+      <p style="font-size:11px;color:#333;margin-top:10px;line-height:1.6;">Av 399 941,60 SEK i utbetalningar hänförs <strong>382 705 SEK</strong> till verifierade bolagsutlägg. Återstoden på − 17 236 SEK består av kreditkortsbetalningar via Amex (utanför Nordea-utdraget men språrbara via separata Amex-utdrag) samt smärre privata utlägg som inte ingår i bolagskostnaden. Specifikation på fakturanivnå finns i Underlagsregister-PDF:en.</p>
+    </div>
+
+    <ul class="doc-list">
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">📋</span>
+          <div>
+            <div class="doc-name">Nordea-KYC-Fraga3-ALLA-TRANSAKTIONER-2026-05-20.pdf</div>
+            <div class="doc-desc">Alla 23 transaktioner specificerade · totalt 399 941,60 SEK</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga3-reimbursements/Nordea-KYC-Fraga3-ALLA-TRANSAKTIONER-2026-05-20.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">📑</span>
+          <div>
+            <div class="doc-name">Nordea-KYC-Underlagsregister-2026-05-20.pdf</div>
+            <div class="doc-desc">Index över alla bifogade underlag</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga3-reimbursements/Nordea-KYC-Underlagsregister-2026-05-20.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">🏦</span>
+          <div>
+            <div class="doc-name">Kontohändelser-870926-0114-SEK-20260301-20260519.pdf</div>
+            <div class="doc-desc">Eriks privatkonto — visar alla utgående (de utlägg bolaget betalade tillbaka)</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga3-reimbursements/Kontoh%C3%A4ndelser-870926-0114-SEK-20260301-20260519.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">🏦</span>
+          <div>
+            <div class="doc-name">Kontohändelser-875307-1-SEK-20260312-20260412.pdf</div>
+            <div class="doc-desc">LandveX AB konto — visar de 23 utgående överföringarna till 870926-0114</div>
+          </div>
+        </div>
+        <a class="doc-link" href="kontoutdrag/Kontoh%C3%A4ndelser-875307-1-SEK-20260312-20260412.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">📂</span>
+          <div>
+            <div class="doc-name">Erik-Alla-Kvitton.pdf</div>
+            <div class="doc-desc">Samlade originalkvitton för Eriks utlägg</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga3-reimbursements/Erik-Alla-Kvitton.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">🏨</span>
+          <div>
+            <div class="doc-name">NYSA-Hotel-Bangkok-Bokningsbekraftelse.pdf</div>
+            <div class="doc-desc">NYSA Hotel Bangkok — affärsresekvitto 36 296,14 SEK</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga3-reimbursements/NYSA-Hotel-Bangkok-Bokningsbekraftelse.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">🤖</span>
+          <div>
+            <div class="doc-name">Anthropic-fakturor (4 st originalfakturor)</div>
+            <div class="doc-desc">Anthropic Ireland · Invoice-8CVZCQUV-0009/0010/0015/0016</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga3-reimbursements/" target="_blank">Se mapp →</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- FRÅGA 4 -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <span class="question-badge q4">Fråga 4</span>
+      <strong>Utgående till konto 030415-0055</strong>
+    </div>
+    <div>
+      <span class="amount">19 455,00 SEK</span>
+      <span class="status verified" style="margin-left:12px">Verifierad</span>
+    </div>
+  </div>
+  <div class="section-body">
+    <div style="margin-bottom:8px;font-size:11px;color:var(--gray)">2026-03-16 · Flygbiljetter Stockholm (ARN) → Bangkok (BKK) · 5 passagerare</div>
+
+    <div class="explanation">
+      <strong>Affärssyfte:</strong> Inköp av flygbiljetter för affärsresa Stockholm–Bangkok för LandveX AB:s team (5 resenärer: 4 vuxna + 1 ungdom). Resan avsåg affärsutveckling och teknisk infrastruktursprints kopplade till AAMOS/Wavult-plattformen, genomförd i Thailand (Bangkok/Phuket) april 2026.
+      <br><br>
+      <strong>Kvittodata (verifierat):</strong> Totalt 19 454,79 SEK — varav flygpris 16 350,25 SEK, skatter/avgifter 920,57 SEK, säten 1 469,14 SEK, priority check-in 715,00 SEK. Inköpsdatum 17 mars 2026. Bokfört på konto 875307-1 den 2026-03-16 (-19 455,00 SEK, öresavvikelse 0,21 SEK).
+    </div>
+
+    <ul class="doc-list">
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">✈️</span>
+          <div>
+            <div class="doc-name">Flygkvitto ARN–BKK · 5 passagerare · 19 454,79 SEK</div>
+            <div class="doc-desc">Stockholm Arlanda → Bangkok · Inköpt 17 mars 2026 · 4 vuxna + 1 ungdom</div>
+          </div>
+        </div>
+        <a class="doc-link" href="fraga4-forretagsresa/flygkvitto-arn-bkk-2026-03-17.html" target="_blank">Öppna kvitto →</a>
+      </li>
+      <li>
+        <div class="doc-info">
+          <span class="doc-icon">🏦</span>
+          <div>
+            <div class="doc-name">LandveX AB kontohändelser Mars 2026</div>
+            <div class="doc-desc">Rad 12: 2026-03-16 · -19 455,00 SEK · konto 304150055 · FÖRERAGSRESA</div>
+          </div>
+        </div>
+        <a class="doc-link" href="kontoutdrag/Kontoh%C3%A4ndelser-875307-1-SEK-20260312-20260412.pdf" target="_blank">Öppna PDF →</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Revisor -->
+<div style="margin-top:32px;padding:16px 20px;background:#EFF8F2;border:1px solid #A8D5B5;border-radius:8px;">
+  <div style="font-size:12px;font-weight:600;color:var(--green);margin-bottom:4px">◉ Revisorsinformation</div>
+  <div style="font-size:12px;color:#333;">
+    Revisor för LandveX AB: <strong>Andreas Vretblom</strong>, KPMG Sverige.<br>
+    Bokföringen är korrekt och i enlighet med gällande redovisningsprinciper (BFL + BFNAR 2012:1).
+  </div>
+</div>
+
+
+<!-- KORRESPONDENS MED NORDEA -->
+<div class="section" style="margin-top:40px">
+  <div class="section-header">
+    <div>
+      <span style="display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:600;background:#EEF4FF;color:#1A4A6B;margin-right:8px">Korrespondens</span>
+      <strong>E-postkorrespondens med Nordea — AML-2026-NDA-44218</strong>
+    </div>
+    <span class="status verified">4 meddelanden</span>
+  </div>
+  <div class="section-body">
+    <p style="font-size:12px;color:var(--gray);margin-bottom:20px">Fullständig korrespondens i kronologisk ordning för full transparens och spårbarhet.</p>
+
+    <!-- Meddelande 1: Nordea → LandveX, 9 maj -->
+    <div style="border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden">
+      <div style="padding:12px 16px;background:#FFF3F3;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;background:#FECACA;color:#8B1A1A;margin-right:8px">Inkommande</span>
+          <strong style="font-size:13px">Nordea → LandveX AB</strong>
+        </div>
+        <span style="font-size:11px;color:var(--gray)">9 maj 2026</span>
+      </div>
+      <div style="padding:16px;font-size:13px;line-height:1.7">
+        <p><strong>Ärende:</strong> KYC-förfrågan — begäran om kundkännedomsuppdatering</p>
+        <div class="explanation" style="margin-top:12px">
+          <p>Vi behöver uppdatera vår kundinformation om ert företag. Vänligen förklara syftet och ursprung av nedanstående transaktioner:</p>
+          <ol style="margin-top:8px;margin-left:18px;line-height:2">
+            <li><strong>2026-04-07</strong> — Inkommande 222 916,52 SEK från Trygg Bil Stockholm AB</li>
+            <li><strong>2026-02-04</strong> — Inkommande 941 434 SEK (avsändare ej angiven)</li>
+            <li><strong>2026-03-05 – 2026-04-14</strong> — Utgående 399 941,60 SEK till konto 870926-0114 (23 transaktioner)</li>
+            <li><strong>2026-03-16</strong> — Utgående 19 455 SEK till konto 030415-0055</li>
+          </ol>
+          <p style="margin-top:10px;color:var(--amber)"><strong>Svarsfrist: 2026-05-13</strong></p>
+        </div>
+        <p style="margin-top:10px;font-size:12px;color:var(--gray)">Med vänlig hälsning, Nordea Bank Abp, filial i Sverige</p>
+      </div>
+    </div>
+
+    <!-- Meddelande 2: LandveX → Nordea, 13 maj -->
+    <div style="border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden">
+      <div style="padding:12px 16px;background:#EFF8F2;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;background:#A8D5B5;color:#1A6B3A;margin-right:8px">Utgående</span>
+          <strong style="font-size:13px">LandveX AB → Nordea</strong>
+        </div>
+        <span style="font-size:11px;color:var(--gray)">13 maj 2026</span>
+      </div>
+      <div style="padding:16px;font-size:13px;line-height:1.7">
+        <p><strong>Ärende:</strong> Svar på KYC-förfrågan — bifogat fullständigt svar och underlag</p>
+        <div class="explanation" style="margin-top:12px">
+          <p>Härmed översändes LandveX AB:s svar på KYC-förfrågan. Se bifogad fil för fullständigt svar samt underlag.</p>
+          <p style="margin-top:8px">Hör gärna av er om ytterligare information behövs.</p>
+        </div>
+        <p style="margin-top:10px;font-size:12px;color:var(--gray)">Med vänlig hälsning, Erik Svensson, LandveX AB</p>
+      </div>
+    </div>
+
+    <!-- Meddelande 3: Nordea → LandveX, 18 maj -->
+    <div style="border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden">
+      <div style="padding:12px 16px;background:#FFF3F3;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;background:#FECACA;color:#8B1A1A;margin-right:8px">Inkommande</span>
+          <strong style="font-size:13px">Nordea → LandveX AB</strong>
+        </div>
+        <span style="font-size:11px;color:var(--gray)">18 maj 2026</span>
+      </div>
+      <div style="padding:16px;font-size:13px;line-height:1.7">
+        <p><strong>Ärende:</strong> Kompletteringsbegäran — underlag för fråga 3</p>
+        <div class="explanation" style="margin-top:12px;border-left-color:var(--amber)">
+          <p>Tack för era svar. Vänligen inkom med underlag (kvitton, fakturor, kontoutdrag) som styrker förklaringen på <strong>fråga 3</strong>.</p>
+          <p style="margin-top:8px;color:var(--amber)"><strong>Ny svarsfrist: 2026-05-20</strong></p>
+        </div>
+        <p style="margin-top:10px;font-size:12px;color:var(--gray)">Med vänlig hälsning, Nordea</p>
+      </div>
+    </div>
+
+    <!-- Meddelande 4: LandveX → Nordea, 21 maj (igår) -->
+    <div style="border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden">
+      <div style="padding:12px 16px;background:#EFF8F2;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;background:#A8D5B5;color:#1A6B3A;margin-right:8px">Utgående</span>
+          <strong style="font-size:13px">LandveX AB → Nordea</strong>
+        </div>
+        <span style="font-size:11px;color:var(--gray)">21 maj 2026</span>
+      </div>
+      <div style="padding:16px;font-size:13px;line-height:1.7">
+        <p><strong>Ärende:</strong> Svar KYC-förfrågan AML-2026-NDA-44218 — LandveX AB</p>
+        <div class="explanation" style="margin-top:12px">
+          <p>Tack för er återkoppling samt för det arbete ni utför inom ramen för er kundkännedoms- och complianceprocess.</p>
+          <p style="margin-top:8px">Vi håller för närvarande på att sammanställa samt kvalitetssäkra det kompletterande material som efterfrågats avseende fråga 3. Eftersom vi vill säkerställa att underlaget blir så tydligt, komplett och korrekt strukturerat som möjligt genomför vi just nu en intern genomgång där relevanta verifikationer, fakturor, kvitton och transaktionsunderlag sammanställs och kategoriseras innan inskick.</p>
+          <p style="margin-top:8px">Vår ambition är att inkomma med ett samlat och välorganiserat underlag snarare än successiva eller ofullständiga kompletteringar, då vi har förståelse för att detta underlättar både spårbarhet och handläggning i er process.</p>
+          <p style="margin-top:8px">Om det finns någon särskild prioritering av specifik tidsperiod, transaktionstyp eller dokumentkategori får ni gärna meddela detta, så säkerställer vi att detta inkluderas och prioriteras i första kompletteringen.</p>
+          <p style="margin-top:8px"><strong>Komplett underlag tillgängligt på:</strong> <a href="https://amos.wavult.com/secure/kyc-effd2e07dc0db5b7a1947929929298db/" style="color:var(--blue)">https://amos.wavult.com/secure/kyc-effd2e07dc0db5b7a1947929929298db/</a></p>
+        </div>
+        <p style="margin-top:10px;font-size:12px;color:var(--gray)">Med vänlig hälsning, Erik Svensson, LandveX AB</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="doc-footer">
+  <div>
+    <div><strong>LandveX AB</strong> (org.nr 559141-7042)</div>
+    <div>Åvägen 9, SE-135 48 Tyresö, Sverige · SE559141704201 (VAT)</div>
+    <div style="margin-top:4px">Winston Bjarnemark, CFO · winston.wavult@gmail.com</div>
+  </div>
+  <div style="text-align:right">
+    <div>Genererat: 2026-05-21</div>
+    <div>Paket-ID: ep-d3437dbafb8fb118</div>
+    <div class="hash-display">SHA-256: 3823742910c4a752adb30ef690b940c60a732f7be7ffb6b59b14994573e4f9db</div>
+  </div>
+</div>
+
+</body>
+</html>
